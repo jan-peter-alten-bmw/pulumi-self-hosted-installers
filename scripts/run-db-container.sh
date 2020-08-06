@@ -42,7 +42,7 @@ if [ -z "${MYSQL_CONT:-}" ]; then
         -e MYSQL_ROOT_PASSWORD="${MYSQL_ROOT_PASSWORD}" \
         -e MYSQL_DATABASE=pulumi \
         -v /tmp/pulumi-db/data:/var/lib/mysql \
-        -v /tmp/certs:/etc/certs
+        -v /tmp/certs:/etc/certs \
         mysql:5.6)
 fi
 
