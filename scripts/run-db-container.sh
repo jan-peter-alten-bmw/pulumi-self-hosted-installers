@@ -6,15 +6,6 @@
 
 set -e
 
-# Initialize temporary TLS cred files so we can reference them throughout the script.
-mkdir -p /tmp/certs
-TEMP_TLS_CERT=/tmp/certs/test-cert.pem
-TEMP_TLS_PRIVATE_KEY=/tmp/certs/test-key.pem
-
-openssl \
-  req -x509 -newkey rsa:4096 -keyout ${TEMP_TLS_PRIVATE_KEY} -out ${TEMP_TLS_CERT} \
-  -days 365 -nodes -subj "/CN=localhost"
-
 exists=$(docker network inspect pulumi-ee)
 
 if [ ${#exists[@]} -eq 0 ]; then
