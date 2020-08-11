@@ -33,6 +33,10 @@ services:
       # The site (RECAPTCHA_SITE_KEY) key counterpart for this 
       # must be set in the `console` service below.
       RECAPTCHA_SECRET_KEY:
+      GITHUB_OAUTH_ID:
+      GITHUB_OAUTH_SECRET:
+      GITLAB_OAUTH_ID:
+      GITLAB_OAUTH_SECRET:
     networks:
       pulumi-ee:
       pulumi-services:
