@@ -45,8 +45,8 @@ services:
     environment:
       PULUMI_API: "https://localhost:8443"
       PULUMI_API_INTERNAL_ENDPOINT: "https://pulumi-api:8443"
-      CONSOLE_DOMAIN: "https://localhost:3443"
-      HOMEPAGE_DOMAIN: "https://localhost:3443"
+      PULUMI_CONSOLE_DOMAIN: "https://localhost:3443"
+      PULUMI_HOMEPAGE_DOMAIN: "https://localhost:3443"
       CONSOLE_TLS_CERTIFICATE: "${CONSOLE_TLS_CERTIFICATE}"
       CONSOLE_TLS_PRIVATE_KEY: "${CONSOLE_TLS_PRIVATE_KEY}"
       GITLAB_OAUTH_ID: "${GITLAB_OAUTH_ID}"
