@@ -37,6 +37,9 @@ services:
       GITHUB_OAUTH_SECRET:
       GITLAB_OAUTH_ID:
       GITLAB_OAUTH_SECRET:
+      STRIPE_API_KEY:
+      DATABASE_CA_CERTIFICATE:
+      DATABASE_MIN_TLS_VERSION:
     networks:
       pulumi-ee:
       pulumi-services:
@@ -73,8 +76,8 @@ services:
       # container-to-container communication.
       # If this env var is removed, then it defaults to the value of PULUMI_API.
       PULUMI_API_INTERNAL_ENDPOINT: "http://pulumi-api:8080"
-      CONSOLE_DOMAIN: "http://localhost:3000"
-      HOMEPAGE_DOMAIN: "http://localhost:3000"
+      PULUMI_CONSOLE_DOMAIN: "https://localhost:3443"
+      PULUMI_HOMEPAGE_DOMAIN: "https://localhost:3443"
       # OAuth configuration for social identities
       GITHUB_OAUTH_ID:
       GITHUB_OAUTH_SECRET:
