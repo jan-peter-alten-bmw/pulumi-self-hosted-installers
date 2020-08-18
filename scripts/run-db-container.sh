@@ -41,6 +41,9 @@ fi
 echo "MySQL container ID: $MYSQL_CONT"
 echo "    to kill: docker kill $MYSQL_CONT"
 
+docker exec -it "$MYSQL_CONT" chmod -R 777 /etc/certs
+docker exec -it "$MYSQL_CONT" /bin/bash -c "service mysql restart" || true
+
 # Initialize the database with our scripts.
 RUN_MIGRATIONS_EXTERNALLY=true \
     ./scripts/init-db-container.sh

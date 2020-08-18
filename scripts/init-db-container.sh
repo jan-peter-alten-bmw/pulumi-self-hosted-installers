@@ -38,8 +38,5 @@ PULUMI_LOCAL_DB_SUPERUSER="${MYSQL_ROOT_USERNAME}" \
 
 echo "Database migrations completed!"
 
-MYSQL_CONT=$(docker ps --filter "name=pulumi-db" --format "{{.ID}}")
 
-docker exec -it "$MYSQL_CONT" chmod -R 777 /etc/certs
-docker exec -it "$MYSQL_CONT" /bin/bash -c "service mysql restart" || true
 
