@@ -41,5 +41,5 @@ echo "Database migrations completed!"
 MYSQL_CONT=$(docker ps --filter "name=pulumi-db" --format "{{.ID}}")
 
 docker exec -it "$MYSQL_CONT" chmod -R 777 /etc/certs
-docker exec -it "$MYSQL_CONT" /bin/bash -c "service mysql restart"
+docker exec -it "$MYSQL_CONT" /bin/bash -c "service mysql restart" || true
 
