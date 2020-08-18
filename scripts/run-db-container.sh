@@ -41,10 +41,10 @@ fi
 echo "MySQL container ID: $MYSQL_CONT"
 echo "    to kill: docker kill $MYSQL_CONT"
 
+MYSQL_CONT=$(docker ps --filter "name=pulumi-db" --format "{{.ID}}")
+
 docker exec -it "$MYSQL_CONT" chmod -R 777 /etc/certs
 docker exec -it "$MYSQL_CONT" /bin/bash -c "service mysql restart" || true
-
-sleep 10
 
 # Initialize the database with our scripts.
 RUN_MIGRATIONS_EXTERNALLY=true \
