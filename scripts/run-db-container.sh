@@ -33,10 +33,11 @@ if [ -z "${MYSQL_CONT:-}" ]; then
         -e MYSQL_ROOT_PASSWORD="${MYSQL_ROOT_PASSWORD}" \
         -e MYSQL_DATABASE=pulumi \
         -v /tmp/pulumi-db/data:/var/lib/mysql \
-        -v /tmp/pulumi-db/data/mysqld.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf \
-        -v /tmp/pulumi-db/data/certs:/etc/certs \
         mysql:5.6)
 fi
+
+        # -v /tmp/pulumi-db/data/mysqld.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf \
+        # -v /tmp/pulumi-db/data/certs:/etc/certs \
 
 echo "MySQL container ID: $MYSQL_CONT"
 echo "    to kill: docker kill $MYSQL_CONT"
