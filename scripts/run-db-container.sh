@@ -38,6 +38,8 @@ if [ -z "${MYSQL_CONT:-}" ]; then
         mysql:5.6)
 fi
 
+docker ps
+
 echo "MySQL container ID: $MYSQL_CONT"
 echo "    to kill: docker kill $MYSQL_CONT"
 

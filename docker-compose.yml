@@ -85,6 +85,8 @@ services:
       GITLAB_OAUTH_SECRET:
       BITBUCKET_OAUTH_ID:
       BITBUCKET_OAUTH_SECRET:
+      DATABASE_CA_CERTIFICATE: 
+      DATABASE_MIN_TLS_VERSION:
       # Email identity config for self-service password reset.
       # The secret (RECAPTCHA_SECRET_KEY) key counterpart for this
       # must be set in the `api` service above.
