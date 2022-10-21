@@ -59,6 +59,9 @@ func NewDatabase(ctx *pulumi.Context, name string, args *DatabaseArgs, opts ...p
 		return nil, err
 	}
 
+	engine := "aurora-mysql"
+	engineVersion := "5.7.mysql_aurora.2.10.2"
+
 	clusterOpts := append(options, pulumi.Protect(true))
 	cluster, err := rds.NewCluster(ctx, ToCommonName(name, "aurora-cluster"), &rds.ClusterArgs{
 		ApplyImmediately:        pulumi.BoolPtr(true),
@@ -67,7 +70,9 @@ func NewDatabase(ctx *pulumi.Context, name string, args *DatabaseArgs, opts ...p
 		DatabaseName:            pulumi.String("pulumi"),
 		DbSubnetGroupName:       subnetGroup.ID(), // misleading ... its ID not name
 		DeletionProtection:      pulumi.BoolPtr(false),
-		Engine:                  pulumi.String("aurora"),
+		Engine:                  pulumi.String(engine),
+		EngineVersion:           pulumi.String(engineVersion),
+		EngineMode:              pulumi.String("provisioned"),
 		FinalSnapshotIdentifier: finalSnapshotId.Hex,
 		MasterUsername:          pulumi.String("pulumi"),
 		MasterPassword:          dbPassword.Result,
@@ -81,7 +86,7 @@ func NewDatabase(ctx *pulumi.Context, name string, args *DatabaseArgs, opts ...p
 
 	// Enable the general and slow query logs and write them to files on the RDS instance.
 	parameterGroup, err := rds.NewParameterGroup(ctx, ToCommonName(name, "instance-options"), &rds.ParameterGroupArgs{
-		Family: pulumi.String("aurora5.6"),
+		Family: pulumi.String("aurora-mysql5.7"),
 		Parameters: rds.ParameterGroupParameterArray{
 			&rds.ParameterGroupParameterArgs{
 				Name:  pulumi.String("slow_query_log"),
@@ -165,6 +170,8 @@ func NewDatabase(ctx *pulumi.Context, name string, args *DatabaseArgs, opts ...p
 	for i := 0; i < numberInstances; i++ {
 		instanceId := fmt.Sprintf("instance-%d", i)
 		_, err := rds.NewClusterInstance(ctx, ToCommonName(name, instanceId), &rds.ClusterInstanceArgs{
+			Engine:               pulumi.String(engine),
+			EngineVersion:        pulumi.String(engineVersion),
 			ClusterIdentifier:    cluster.ID(),
 			InstanceClass:        args.instanceType,
 			DbParameterGroupName: parameterGroup.Name,
